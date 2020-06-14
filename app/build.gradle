@@ -96,16 +96,16 @@ dependencies {
     implementation "android.arch.work:work-runtime-ktx:$version_work"
 
     //Dagger hilt
-    implementation "com.google.dagger:dagger:$daggerVersion"
-    implementation "com.google.dagger:hilt-android:$daggerHiltAndroidVersion"
-    implementation "com.google.dagger:hilt-android-testing:$daggerHiltAndroidVersion"
-    implementation "androidx.hilt:hilt-common:$daggerHiltVersion"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$daggerHiltVersion"
-    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
-    kapt "com.google.dagger:hilt-android-compiler:$daggerHiltAndroidVersion"
-    kapt "androidx.hilt:hilt-compiler:$daggerHiltVersion"
-    androidTestImplementation "com.google.dagger:hilt-android-testing:$daggerHiltAndroidVersion"
-    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$daggerHiltAndroidVersion"
+    implementation "com.google.dagger:dagger:$version_dagger"
+    implementation "com.google.dagger:hilt-android:$version_daggerHiltAndroid"
+    implementation "com.google.dagger:hilt-android-testing:$version_daggerHiltAndroid"
+    implementation "androidx.hilt:hilt-common:$version_daggerHilt"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$version_daggerHilt"
+    kapt "com.google.dagger:dagger-compiler:$version_dagger"
+    kapt "com.google.dagger:hilt-android-compiler:$version_daggerHiltAndroid"
+    kapt "androidx.hilt:hilt-compiler:$version_daggerHilt"
+    androidTestImplementation "com.google.dagger:hilt-android-testing:$version_daggerHiltAndroid"
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$version_daggerHiltAndroid"
 
     implementation 'com.android.support:multidex:1.0.3'
 
