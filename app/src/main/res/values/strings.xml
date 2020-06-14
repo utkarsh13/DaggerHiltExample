@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Github Trending</string>
+    <string name="app_name">Dagger Hilt Example</string>
     <string name="item_image_content_desc">Avatar image</string>
     <string name="toolbar_title">Trending</string>
     <string name="sort_by_stars">Sort by stars</string>

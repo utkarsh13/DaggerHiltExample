@@ -1,5 +1,6 @@
 package com.utkarsh.daggerhiltexample.diHilt
 
+import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import com.utkarsh.daggerhiltexample.database.RepositoriesDatabase
@@ -15,9 +16,9 @@ import javax.inject.Singleton
 object DatabaseModule {
     @Provides
     @Singleton
-    fun provideRepositoriesDatabase(applicationContext: Context): RepositoriesDatabase {
+    fun provideRepositoriesDatabase(application: Application): RepositoriesDatabase {
         return Room.databaseBuilder(
-            applicationContext,
+            application.applicationContext,
             RepositoriesDatabase::class.java,
             "repositories_database"
         )

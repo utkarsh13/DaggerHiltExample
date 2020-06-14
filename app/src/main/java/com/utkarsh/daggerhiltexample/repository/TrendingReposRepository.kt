@@ -7,23 +7,27 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.utkarsh.daggerhiltexample.database.DatabaseRepository
 import com.utkarsh.daggerhiltexample.database.RepositoriesDatabase
+import com.utkarsh.daggerhiltexample.database.RepositoriesDatabaseDao
 import com.utkarsh.daggerhiltexample.database.asDomainModel
 import com.utkarsh.daggerhiltexample.domain.Repository
 import com.utkarsh.daggerhiltexample.network.Network
+import com.utkarsh.daggerhiltexample.network.RepositoriesApiService
 import com.utkarsh.daggerhiltexample.network.asDBModel
 import com.utkarsh.daggerhiltexample.trendingRepositories.RepositoriesApiStatus
 import com.utkarsh.daggerhiltexample.trendingRepositories.RepositorySort
 import com.utkarsh.daggerhiltexample.utils.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 
-class TrendingReposRepository(
-    private val database: RepositoriesDatabase,
+class TrendingReposRepository @Inject constructor(
+    private val dao: RepositoriesDatabaseDao,
+    private val repositoriesApiService: RepositoriesApiService,
     private val context: Context
 ) {
 
-    val repositories: LiveData<List<Repository>> = Transformations.map(database.repositoriesDatabaseDao.getAllRepositories()) {
+    val repositories: LiveData<List<Repository>> = Transformations.map(dao.getAllRepositories()) {
         it.asDomainModel()
     }
 
@@ -42,10 +46,10 @@ class TrendingReposRepository(
             withContext(Dispatchers.IO) {
                 try {
                     _apiStatus.postValue(RepositoriesApiStatus.LOADING)
-                    val getRepositoriesDeferred = Network.repositories.getAllRepositoriesAsync()
+                    val getRepositoriesDeferred = repositoriesApiService.getAllRepositoriesAsync()
                     val repositories = getRepositoriesDeferred.await()
 
-                    database.repositoriesDatabaseDao.insertAllRepositories(repositories.asDBModel())
+                    dao.insertAllRepositories(repositories.asDBModel())
                     context.defaultSharedPreferences.putBoolean(IS_CACHE_AVAILABLE, true)
                     context.defaultSharedPreferences.putLong(LAST_CACHE_TIME, System.currentTimeMillis())
                     _apiStatus.postValue(RepositoriesApiStatus.SUCCESS)
@@ -72,9 +76,9 @@ class TrendingReposRepository(
     suspend fun getRepositories(sortType: RepositorySort): List<Repository> {
         return withContext(Dispatchers.IO) {
             val repos: List<DatabaseRepository> = when (sortType) {
-                RepositorySort.SORT_NAME -> database.repositoriesDatabaseDao.getAllRepositoriesSortedByName()
-                RepositorySort.SORT_STAR -> database.repositoriesDatabaseDao.getAllRepositoriesSortedByStars()
-                else -> database.repositoriesDatabaseDao.getAllRepositoriesList()
+                RepositorySort.SORT_NAME -> dao.getAllRepositoriesSortedByName()
+                RepositorySort.SORT_STAR -> dao.getAllRepositoriesSortedByStars()
+                else -> dao.getAllRepositoriesList()
             }
             repos.asDomainModel()
         }

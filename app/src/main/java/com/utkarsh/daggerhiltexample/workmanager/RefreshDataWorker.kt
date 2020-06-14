@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.utkarsh.daggerhiltexample.database.RepositoriesDatabase
+import com.utkarsh.daggerhiltexample.network.Network
 import com.utkarsh.daggerhiltexample.repository.TrendingReposRepository
 import com.utkarsh.daggerhiltexample.utils.IS_CACHE_AVAILABLE
 import com.utkarsh.daggerhiltexample.utils.defaultSharedPreferences
@@ -19,7 +20,7 @@ class RefreshDataWorker(appContext: Context, params: WorkerParameters):
 
     override suspend fun doWork(): Result {
         val database = RepositoriesDatabase.getInstance(applicationContext)
-        val repository = TrendingReposRepository(database, applicationContext)
+        val repository = TrendingReposRepository(database.repositoriesDatabaseDao, Network.repositories ,applicationContext)
 
         try {
             //To discard cache

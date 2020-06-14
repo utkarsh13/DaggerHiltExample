@@ -1,5 +1,6 @@
 package com.utkarsh.daggerhiltexample.trendingRepositories
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,7 +12,7 @@ enum class RepositoriesApiStatus { LOADING, ERROR, SUCCESS, OFFLINE }
 
 enum class RepositorySort{ SORT_NAME, SORT_STAR, DEFAULT }
 
-class RepositoriesViewModel(private val trendingReposRepository: TrendingReposRepository) : ViewModel() {
+class RepositoriesViewModel @ViewModelInject constructor(private val trendingReposRepository: TrendingReposRepository) : ViewModel() {
 
     private val viewModelJob = SupervisorJob()
 

@@ -1,9 +1,9 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'androidx.navigation.safeargs'
 
 android {
     compileSdkVersion 29
@@ -15,6 +15,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -25,6 +26,17 @@ android {
 
     dataBinding {
         enabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+    androidExtensions {
+        experimental = true
     }
 
     testOptions {
@@ -41,6 +53,7 @@ dependencies {
     // Support libraries
     implementation "androidx.appcompat:appcompat:$version_appcompat"
     implementation "androidx.fragment:fragment:$version_fragment"
+    implementation "androidx.fragment:fragment-ktx:$version_fragment"
     implementation "androidx.constraintlayout:constraintlayout:$version_constraint_layout"
 
     // Android KTX
@@ -52,6 +65,9 @@ dependencies {
 
     // ViewModel and LiveData (arch components)
     implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle_extensions"
+
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$version_lifecycle_extensions"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$version_lifecycle_extensions"
 
     // Coroutines for getting off the UI thread
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version_kotlin_coroutines"
@@ -80,8 +96,18 @@ dependencies {
     implementation "android.arch.work:work-runtime-ktx:$version_work"
 
     //Dagger hilt
-    implementation "com.google.dagger:hilt-android:$version_hilt"
-    kapt "com.google.dagger:hilt-android-compiler:$version_hilt"
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:hilt-android:$daggerHiltAndroidVersion"
+    implementation "com.google.dagger:hilt-android-testing:$daggerHiltAndroidVersion"
+    implementation "androidx.hilt:hilt-common:$daggerHiltVersion"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$daggerHiltVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:hilt-android-compiler:$daggerHiltAndroidVersion"
+    kapt "androidx.hilt:hilt-compiler:$daggerHiltVersion"
+    androidTestImplementation "com.google.dagger:hilt-android-testing:$daggerHiltAndroidVersion"
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$daggerHiltAndroidVersion"
+
+    implementation 'com.android.support:multidex:1.0.3'
 
     //Testing
     testImplementation "junit:junit:$version_junit"

@@ -5,35 +5,26 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.utkarsh.daggerhiltexample.database.RepositoriesDatabase
 import com.utkarsh.daggerhiltexample.R
 import com.utkarsh.daggerhiltexample.databinding.FragmentRepositoriesBinding
 import com.utkarsh.daggerhiltexample.domain.Repository
-import com.utkarsh.daggerhiltexample.repository.TrendingReposRepository
 import com.facebook.shimmer.ShimmerFrameLayout
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.appbar_layout.*
 import kotlinx.android.synthetic.main.fragment_repositories.view.*
 import kotlinx.android.synthetic.main.shimmer_layout.view.*
 
-
+@AndroidEntryPoint
 class RepositoriesFragment : Fragment() {
 
     private var viewModelAdapter: RepositoriesAdapter? = null
 
-    private val viewModel: RepositoriesViewModel by lazy {
-        val activity = requireNotNull(this.activity) {
-            "You can only access the viewModel after onActivityCreated()"
-        }
-        val database = RepositoriesDatabase.getInstance(activity.applicationContext)
-        val trendingReposRepository = TrendingReposRepository(database, activity.applicationContext)
-        ViewModelProviders.of(this, RepositoriesViewModelFactory(trendingReposRepository))
-            .get(RepositoriesViewModel::class.java)
-    }
+    val viewModel: RepositoriesViewModel by viewModels()
 
     private var swipeRefreshLayout: SwipeRefreshLayout? = null
     private var shimmerLayout: ShimmerFrameLayout? = null
