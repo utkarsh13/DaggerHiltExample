@@ -104,8 +104,8 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$version_dagger"
     kapt "com.google.dagger:hilt-android-compiler:$version_daggerHiltAndroid"
     kapt "androidx.hilt:hilt-compiler:$version_daggerHilt"
-    androidTestImplementation "com.google.dagger:hilt-android-testing:$version_daggerHiltAndroid"
-    kaptAndroidTest "com.google.dagger:hilt-android-compiler:$version_daggerHiltAndroid"
+    implementation "androidx.hilt:hilt-work:$version_daggerHilt"
+
 
     implementation 'com.android.support:multidex:1.0.3'
 

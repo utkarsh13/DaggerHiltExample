@@ -1,35 +1,40 @@
 package com.utkarsh.daggerhiltexample.workmanager
 
 import android.content.Context
+import androidx.hilt.Assisted
+import androidx.hilt.work.WorkerInject
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.utkarsh.daggerhiltexample.database.RepositoriesDatabase
-import com.utkarsh.daggerhiltexample.network.Network
+import com.utkarsh.daggerhiltexample.database.RepositoriesDatabaseDao
 import com.utkarsh.daggerhiltexample.repository.TrendingReposRepository
 import com.utkarsh.daggerhiltexample.utils.IS_CACHE_AVAILABLE
 import com.utkarsh.daggerhiltexample.utils.defaultSharedPreferences
 import com.utkarsh.daggerhiltexample.utils.putBoolean
 import retrofit2.HttpException
+import javax.inject.Inject
 
-class RefreshDataWorker(appContext: Context, params: WorkerParameters):
+class RefreshDataWorker @WorkerInject constructor(@Assisted private val appContext: Context, @Assisted params: WorkerParameters):
     CoroutineWorker(appContext, params) {
 
     companion object {
         const val WORK_NAME = "RefreshDataWorker"
     }
 
-    override suspend fun doWork(): Result {
-        val database = RepositoriesDatabase.getInstance(applicationContext)
-        val repository = TrendingReposRepository(database.repositoriesDatabaseDao, Network.repositories ,applicationContext)
+    @Inject
+    lateinit var dao: RepositoriesDatabaseDao
 
-        try {
+    @Inject
+    lateinit var repository: TrendingReposRepository
+
+    override suspend fun doWork(): Result {
+        return try {
             //To discard cache
-            database.repositoriesDatabaseDao.clear()
-            applicationContext.defaultSharedPreferences.putBoolean(IS_CACHE_AVAILABLE, false)
+            dao.clear()
+            appContext.defaultSharedPreferences.putBoolean(IS_CACHE_AVAILABLE, false)
             repository.refreshRepositories()
-            return Result.success()
+            Result.success()
         } catch (e: HttpException) {
-            return Result.retry()
+            Result.retry()
         }
     }
 

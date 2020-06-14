@@ -10,7 +10,6 @@ import com.utkarsh.daggerhiltexample.database.RepositoriesDatabase
 import com.utkarsh.daggerhiltexample.database.RepositoriesDatabaseDao
 import com.utkarsh.daggerhiltexample.database.asDomainModel
 import com.utkarsh.daggerhiltexample.domain.Repository
-import com.utkarsh.daggerhiltexample.network.Network
 import com.utkarsh.daggerhiltexample.network.RepositoriesApiService
 import com.utkarsh.daggerhiltexample.network.asDBModel
 import com.utkarsh.daggerhiltexample.trendingRepositories.RepositoriesApiStatus
