@@ -17,7 +17,7 @@ class RefreshDataWorker(appContext: Context, params: WorkerParameters):
         const val WORK_NAME = "RefreshDataWorker"
     }
 
-    override suspend fun doWork(): Payload {
+    override suspend fun doWork(): Result {
         val database = RepositoriesDatabase.getInstance(applicationContext)
         val repository = TrendingReposRepository(database, applicationContext)
 
@@ -26,9 +26,9 @@ class RefreshDataWorker(appContext: Context, params: WorkerParameters):
             database.repositoriesDatabaseDao.clear()
             applicationContext.defaultSharedPreferences.putBoolean(IS_CACHE_AVAILABLE, false)
             repository.refreshRepositories()
-            return Payload(Result.SUCCESS)
+            return Result.success()
         } catch (e: HttpException) {
-            return Payload(Result.RETRY)
+            return Result.retry()
         }
     }
 
