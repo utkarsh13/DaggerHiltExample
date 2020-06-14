@@ -5,11 +5,13 @@ import android.os.Bundle
 import androidx.work.*
 import com.utkarsh.daggerhiltexample.R
 import com.utkarsh.daggerhiltexample.workmanager.RefreshDataWorker
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val activityScope = CoroutineScope(Dispatchers.Default)
