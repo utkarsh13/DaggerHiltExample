@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="item_image_size">32dp</dimen>
+    <dimen name="extra_detail_margin_end">4dp</dimen>
+    <dimen name="extra_detail_view_size">16dp</dimen>
+    <dimen name="default_margin_16">16dp</dimen>
+    <dimen name="margin_24">24dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+
+</resources>

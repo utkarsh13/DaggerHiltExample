@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_constraint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        app:layout_constraintBottom_toTopOf="@+id/repo_name"
+        app:layout_constraintTop_toTopOf="@+id/repo_name">
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/item_image_size"
+            android:layout_height="@dimen/item_image_size"
+            android:layout_marginStart="@dimen/default_margin_16"
+            android:layout_marginTop="@dimen/margin_24"
+            android:layout_marginEnd="@dimen/default_margin_16"
+            android:contentDescription="@string/item_image_content_desc"
+            app:imageUrl="@{repository.avatar}"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_vertical_left"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/author_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin_16"
+            android:fontFamily="@font/roboto"
+            android:text="@{repository.author}"
+            android:textColor="@color/default_text_color"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_vertical_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_vertical_left"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Utkarsh" />
+
+        <TextView
+            android:id="@+id/repo_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="@dimen/default_margin_16"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@{repository.name}"
+            android:textColor="@color/default_text_color"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@id/expandable_layout"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_vertical_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_vertical_left"
+            app:layout_constraintTop_toBottomOf="@+id/author_name"
+            tools:text="Utkarsh Repo" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_vertical_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="64dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_vertical_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/default_margin_16"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/default_margin_16" />
+
+
+        <View
+            android:id="@+id/item_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/divider_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/expandable_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_margin_16"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/item_divider"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_vertical_right"
+            app:layout_constraintStart_toStartOf="@+id/guideline_vertical_left"
+            app:layout_constraintTop_toBottomOf="@+id/repo_name"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:text="@{repository.details}"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Utkarsh Description" />
+
+            <LinearLayout
+                android:id="@+id/detail_linear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/details">
+
+                <View
+                    android:id="@+id/language_color"
+                    android:layout_width="@dimen/extra_detail_view_size"
+                    android:layout_height="@dimen/extra_detail_view_size"
+                    android:layout_marginEnd="@dimen/extra_detail_margin_end"
+                    android:background="@drawable/circle"
+                    app:backgroundColor="@{repository.languageColor}"
+                    tools:background="@drawable/circle" />
+
+                <TextView
+                    android:id="@+id/language_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/default_margin_16"
+                    android:fontFamily="@font/roboto"
+                    app:textViewSetText="@{repository.language}"
+                    android:textColor="@color/default_text_color"
+                    android:textSize="12sp"
+                    tools:text="Kotlin" />
+
+                <ImageView
+                    android:id="@+id/star_image"
+                    android:layout_width="@dimen/extra_detail_view_size"
+                    android:layout_height="@dimen/extra_detail_view_size"
+                    android:layout_marginEnd="@dimen/extra_detail_margin_end"
+                    android:src="@drawable/star_yellow_16"
+                    tools:src="@drawable/star_yellow_16" />
+
+                <TextView
+                    android:id="@+id/star_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/default_margin_16"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/default_text_color"
+                    android:textSize="12sp"
+                    app:setText="@{repository.stars}"
+                    tools:text="2345" />
+
+                <ImageView
+                    android:id="@+id/fork_image"
+                    android:layout_width="@dimen/extra_detail_view_size"
+                    android:layout_height="@dimen/extra_detail_view_size"
+                    android:layout_marginEnd="@dimen/extra_detail_margin_end"
+                    android:src="@drawable/fork_black_16"
+                    tools:src="@drawable/fork_black_16" />
+
+                <TextView
+                    android:id="@+id/fork_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/default_margin_16"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@color/default_text_color"
+                    android:textSize="12sp"
+                    app:setText="@{repository.forks}"
+                    tools:text="231" />
+
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="repository"
+            type="com.utkarsh.daggerhiltexample.domain.Repository" />
+
+    </data>
+
+
+</layout>

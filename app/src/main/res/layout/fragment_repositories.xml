@@ -1,0 +1,122 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.utkarsh.daggerhiltexample.trendingRepositories.RepositoriesFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/appbar_layout" />
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appbar_layout">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/repositories_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                tools:itemCount="16"
+                tools:listitem="@layout/repository_item"
+                android:visibility="gone"/>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+        <include layout="@layout/shimmer_layout" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/retry_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appbar_layout"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/no_internet_image"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_marginTop="150dp"
+                android:contentDescription="@string/no_internet_connection"
+                android:src="@drawable/nointernet_connection"
+                app:layout_constraintBottom_toTopOf="@+id/no_internet_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/no_internet_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin_16"
+                android:layout_marginTop="@dimen/margin_24"
+                android:layout_marginEnd="@dimen/default_margin_16"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/no_internet_connection_title"
+                android:textAlignment="center"
+                android:textColor="@color/error_title_color"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/no_internet_image" />
+
+            <TextView
+                android:id="@+id/no_internet_subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/default_margin_16"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginEnd="@dimen/default_margin_16"
+                android:fontFamily="@font/roboto"
+                android:text="@string/no_internet_connection_subtitle"
+                android:textColor="@color/error_subtitle_color"
+                android:textAlignment="center"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/no_internet_title" />
+
+            <Button
+                android:id="@+id/no_internet_retry_button"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_margin="@dimen/default_margin_16"
+                android:layout_marginTop="@dimen/margin_8"
+                android:background="@drawable/button_with_border"
+                android:fontFamily="@font/roboto_medium"
+                android:onClick="@{() -> viewModel.retryClicked()}"
+                android:paddingTop="@dimen/default_margin_16"
+                android:paddingBottom="@dimen/default_margin_16"
+                android:text="@string/retry_text"
+                android:textAlignment="center"
+                android:textColor="@color/green_color"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="RETRY" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.utkarsh.daggerhiltexample.trendingRepositories.RepositoriesViewModel" />
+    </data>
+</layout>

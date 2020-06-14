@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="placeholderColor">#ffffed</color>
+    <color name="default_text_color">#52575c</color>
+    <color name="black_color">#000000</color>
+    <color name="white_color">#ffffff</color>
+    <color name="toolbarColor">#25282B</color>
+    <color name="shimmer_background">#dedede</color>
+    <color name="green_color">#31b057</color>
+    <color name="error_title_color">#4a4a4a</color>
+    <color name="error_subtitle_color">#929292</color>
+    <color name="divider_color">#e8e8e8</color>
+    <color name="toolbar_color">#25282b</color>
+</resources>

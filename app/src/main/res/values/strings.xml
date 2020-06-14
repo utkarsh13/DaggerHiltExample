@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Github Trending</string>
+    <string name="item_image_content_desc">Avatar image</string>
+    <string name="toolbar_title">Trending</string>
+    <string name="sort_by_stars">Sort by stars</string>
+    <string name="sort_by_names">Sort by names</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="no_internet_connection_title">Something went wrong..</string>
+    <string name="no_internet_connection_subtitle">An alien is probably blocking your signal.</string>
+    <string name="retry_text">RETRY</string>
+
+</resources>
