@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         val constraints = Constraints.Builder()
             .build()
 
-        val repeatingRequest = PeriodicWorkRequestBuilder<RefreshDataWorker>(2, TimeUnit.SECONDS)
+        val repeatingRequest = PeriodicWorkRequestBuilder<RefreshDataWorker>(2, TimeUnit.HOURS)
             .setConstraints(constraints)
             .build()
 
