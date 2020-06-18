@@ -11,20 +11,16 @@ import com.utkarsh.daggerhiltexample.utils.IS_CACHE_AVAILABLE
 import com.utkarsh.daggerhiltexample.utils.defaultSharedPreferences
 import com.utkarsh.daggerhiltexample.utils.putBoolean
 import retrofit2.HttpException
-import javax.inject.Inject
 
-class RefreshDataWorker @WorkerInject constructor(@Assisted private val appContext: Context, @Assisted params: WorkerParameters):
+class RefreshDataWorker @WorkerInject constructor(@Assisted private val appContext: Context,
+                                                  @Assisted params: WorkerParameters,
+                                                  private val dao: RepositoriesDatabaseDao,
+                                                  private val repository: TrendingReposRepository):
     CoroutineWorker(appContext, params) {
 
     companion object {
         const val WORK_NAME = "RefreshDataWorker"
     }
-
-    @Inject
-    lateinit var dao: RepositoriesDatabaseDao
-
-    @Inject
-    lateinit var repository: TrendingReposRepository
 
     override suspend fun doWork(): Result {
         return try {

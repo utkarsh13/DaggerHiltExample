@@ -16,7 +16,7 @@ buildscript {
         version_retrofit = "2.5.0"
         version_moshi = "1.8.0"
         version_glide = "4.8.0"
-        version_work = "1.0.1"
+        version_work = "2.3.4"
         version_shimmer = "0.5.0@aar"
         version_junit = "4.12"
         version_ext_junit = "1.1.0"
