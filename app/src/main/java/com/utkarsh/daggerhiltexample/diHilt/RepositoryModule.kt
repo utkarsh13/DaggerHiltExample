@@ -9,6 +9,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import javax.inject.Singleton
 
@@ -17,7 +18,7 @@ import javax.inject.Singleton
 object RepositoryModule {
     @Provides
     @Singleton
-    fun provideTrendingReposRepository(dao: RepositoriesDatabaseDao, repositoriesApiService: RepositoriesApiService, application: Application): TrendingReposRepository {
-        return TrendingReposRepository(dao, repositoriesApiService, application.applicationContext)
+    fun provideTrendingReposRepository(dao: RepositoriesDatabaseDao, repositoriesApiService: RepositoriesApiService, @ApplicationContext context: Context): TrendingReposRepository {
+        return TrendingReposRepository(dao, repositoriesApiService, context)
     }
 }

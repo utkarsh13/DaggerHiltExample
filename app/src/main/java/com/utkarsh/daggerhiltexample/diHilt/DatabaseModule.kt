@@ -9,6 +9,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Singleton
 
 @Module
@@ -16,9 +17,9 @@ import javax.inject.Singleton
 object DatabaseModule {
     @Provides
     @Singleton
-    fun provideRepositoriesDatabase(application: Application): RepositoriesDatabase {
+    fun provideRepositoriesDatabase(@ApplicationContext context: Context): RepositoriesDatabase {
         return Room.databaseBuilder(
-            application.applicationContext,
+            context,
             RepositoriesDatabase::class.java,
             "repositories_database"
         )
